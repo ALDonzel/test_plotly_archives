@@ -1,0 +1,92 @@
+---
+title: "Plotly & archives"
+output:
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: inline
+---
+
+```{r, echo=FALSE, warning=FALSE, include=FALSE}
+library(plotly)
+```
+
+# Réalisation d'un premier graph ne prenant en compte que les colonnes textuelles
+
+Visualisation des éléments consultés en ligne au premier semestre 2022 et classés par grandes familles de fonds
+
+```{r, echo=FALSE}
+data <- read.csv("AD13_data_sem1.csv", encoding = "UTF-8")
+```
+
+```{r, echo=FALSE}
+
+
+graph <-  plot_ly(
+                type = "treemap",
+                labels = data$labels,
+                parents = data$parent,
+                marker=list(colorscale="YlGnBu")) %>% 
+            layout(title = "Ma jolie Treemap V1")
+
+graph
+```
+# Second graph qui prend en compte les valeurs (nombre de vues au premier semestre 2022)
+
+
+Graphique basé sur les mêmes données que supra mais intégrant la valeur du nombre de vues (par ex. 81840 pages de l'état-civil de la ville de Marseille ont été vues)
+
+```{r, echo=FALSE}
+
+
+graph <-  plot_ly(
+                type = "treemap",
+                labels = data$labels,
+                parents = data$parent,
+                values = data$value,
+                marker=list(colorscale="YlGnBu")) %>% 
+            layout(title = "Ma tout aussi jolie treemap V2")
+
+graph
+```
+# Autre visualiation des mêmes données, avec intégration des valeurs
+
+Graphique identique au précédent mais sous la forme d'un sunburst.
+
+```{r, echo=FALSE}
+
+
+
+soleil <-  plot_ly(
+                type = "sunburst",
+                labels = data$labels,
+                parents = data$parent,
+                values = data$value,
+                marker=list(colorscale="YlGnBu")) %>% 
+            layout(title = "Mon juli sunburst")
+
+soleil
+```
+# Visualisation d'un état des fonds d'archives sous la forme d'une treemap
+
+Changement de données : à partir de l'état des fonds des AD29 (données scrappées sur le site internet des AD). 
+
+
+```{r, echo=FALSE}
+
+
+
+adf <- read.csv("AD29_etat_fonds.csv", encoding = "UTF-8")
+```
+
+```{r, echo=FALSE}
+
+etat <-  plot_ly(
+                type = "treemap",
+                labels = adf$labels,
+                parents = adf$parents)
+
+etat
+```
+```
+

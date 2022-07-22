@@ -1,5 +1,7 @@
 # Test de visualisation de données avec plotly
 
+** Dataviz réalisée dans le cadre d'un apprentissage de Rstudio**
+
 Plotly et RStudio
 
 Treemap et sunburst
